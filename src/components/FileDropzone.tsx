@@ -41,7 +41,7 @@ export function FileDropzone({ onFileSelected, onLoadSample, isLoading }: FileDr
         <span />
       </div>
       <div>
-        <p className="eyebrow">Local file parsing</p>
+        <p className="panelKicker">Local file parsing</p>
         <h2>Upload a spreadsheet</h2>
         <p>
           Drop a CSV or Excel file here. Your data stays in this browser session while you build charts.

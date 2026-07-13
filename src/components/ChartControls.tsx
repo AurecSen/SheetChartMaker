@@ -25,19 +25,13 @@ const aggregations: Array<{ value: Aggregation; label: string }> = [
 export function ChartControls({ columns, config, onChange }: ChartControlsProps) {
   const numberColumns = columns.filter((column) => column.type === 'number');
   const update = <Key extends keyof ChartConfig>(key: Key, value: ChartConfig[Key]) => {
-    const next = { ...config, [key]: value };
-
-    if (key === 'aggregation' && value === 'count') {
-      next.yColumn = config.yColumn;
-    }
-
-    onChange(next);
+    onChange({ ...config, [key]: value });
   };
 
   return (
     <aside className="controlPanel" aria-label="Chart controls">
       <div className="panelHeader">
-        <p className="eyebrow">Chart builder</p>
+        <p className="panelKicker">Chart builder</p>
         <h2>Configure the view</h2>
       </div>
 

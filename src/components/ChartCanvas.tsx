@@ -32,7 +32,7 @@ export function ChartCanvas({ dataset, config }: ChartCanvasProps) {
     <section className="chartPanel" aria-labelledby="chart-heading">
       <div className="chartHeader">
         <div>
-          <p className="eyebrow">Visualization</p>
+          <p className="panelKicker">Visualization</p>
           <h2 id="chart-heading">{getChartTitle(config)}</h2>
           <p>{getChartDescription(config)}</p>
         </div>
@@ -81,14 +81,14 @@ function getValueRange(data: AggregatedChartData) {
   const values = data.series.flatMap((series) => series.values);
   const min = Math.min(0, ...values);
   const max = Math.max(1, ...values);
-  return { min, max, span: max - min || 1 };
+  return { min, span: max - min || 1 };
 }
 
 function yScale(value: number, min: number, span: number) {
   return MARGIN.top + PLOT_HEIGHT - ((value - min) / span) * PLOT_HEIGHT;
 }
 
-function renderGrid(min: number, max: number, span: number) {
+function renderGrid(min: number, span: number) {
   return Array.from({ length: 5 }).map((_, index) => {
     const value = min + (span / 4) * index;
     const y = yScale(value, min, span);
@@ -132,7 +132,7 @@ function Legend({ items }: { items: Array<{ name: string; color: string }> }) {
 }
 
 function BarChart({ data }: { data: AggregatedChartData }) {
-  const { min, max, span } = getValueRange(data);
+  const { min, span } = getValueRange(data);
   const band = PLOT_WIDTH / Math.max(data.labels.length, 1);
   const barGroupWidth = band * 0.68;
   const barWidth = Math.max(4, barGroupWidth / Math.max(data.series.length, 1));
@@ -140,7 +140,7 @@ function BarChart({ data }: { data: AggregatedChartData }) {
 
   return (
     <g>
-      {renderGrid(min, max, span)}
+      {renderGrid(min, span)}
       {data.labels.map((label, labelIndex) => {
         const groupStart = MARGIN.left + labelIndex * band + (band - barGroupWidth) / 2;
         return data.series.map((series, seriesIndex) => {
@@ -167,11 +167,11 @@ function BarChart({ data }: { data: AggregatedChartData }) {
 }
 
 function LineChart({ data }: { data: AggregatedChartData }) {
-  const { min, max, span } = getValueRange(data);
+  const { min, span } = getValueRange(data);
 
   return (
     <g>
-      {renderGrid(min, max, span)}
+      {renderGrid(min, span)}
       {data.series.map((series) => {
         const points = series.values.map((value, index) => {
           const x = MARGIN.left + (data.labels.length <= 1 ? PLOT_WIDTH / 2 : (index / (data.labels.length - 1)) * PLOT_WIDTH);
@@ -197,12 +197,12 @@ function LineChart({ data }: { data: AggregatedChartData }) {
 }
 
 function AreaChart({ data }: { data: AggregatedChartData }) {
-  const { min, max, span } = getValueRange(data);
+  const { min, span } = getValueRange(data);
   const baseline = yScale(0, min, span);
 
   return (
     <g>
-      {renderGrid(min, max, span)}
+      {renderGrid(min, span)}
       {data.series.map((series) => {
         const points = series.values.map((value, index) => {
           const x = MARGIN.left + (data.labels.length <= 1 ? PLOT_WIDTH / 2 : (index / (data.labels.length - 1)) * PLOT_WIDTH);
@@ -274,7 +274,7 @@ function ScatterChart({ data }: { data: ScatterSeries[] }) {
 
   return (
     <g>
-      {renderGrid(minY, maxY, ySpan)}
+      {renderGrid(minY, ySpan)}
       {data.map((series) => (
         <g key={series.name}>
           {series.points.map((point, index) => (

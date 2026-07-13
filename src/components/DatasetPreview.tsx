@@ -13,7 +13,7 @@ export function DatasetPreview({ dataset }: DatasetPreviewProps) {
     <section className="tableCard" aria-labelledby="preview-heading">
       <div className="sectionHeader">
         <div>
-          <p className="eyebrow">Table preview</p>
+          <p className="panelKicker">Table preview</p>
           <h2 id="preview-heading">{dataset.name}</h2>
         </div>
         <p>

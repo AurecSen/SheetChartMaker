@@ -134,7 +134,7 @@ export function createDataset(name: string, rows: DataRow[]) {
   };
 }
 
-export function chooseDefaultConfig(rows: DataRow[], columns: ColumnProfile[]): ChartConfig {
+export function chooseDefaultConfig(_rows: DataRow[], columns: ColumnProfile[]): ChartConfig {
   const firstNumber = columns.find((column) => column.type === 'number');
   const firstDate = columns.find((column) => column.type === 'date');
   const firstText = columns.find((column) => column.type === 'text');
