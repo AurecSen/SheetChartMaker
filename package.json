@@ -5,23 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -p tsconfig.app.json && vite build",
     "test": "vitest run --config vitest.config.ts",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/papaparse": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
     "papaparse": "latest",
     "react": "latest",
     "react-dom": "latest",
     "typescript": "latest",
     "vite": "latest",
+    "vitest": "latest",
     "xlsx": "latest"
   },
-  "devDependencies": {
-    "@types/papaparse": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "vitest": "latest"
-  }
+  "devDependencies": {}
 }
