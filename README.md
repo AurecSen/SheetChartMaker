@@ -31,6 +31,10 @@ npm run test
 npm run build
 ```
 
+## Deployment
+
+The app is configured as a Vite project and can be deployed on static hosting platforms such as Vercel.
+
 ## Tech stack
 
 - React
